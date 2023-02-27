@@ -106,7 +106,9 @@ const BookListRow = ({ books }) => {
 
       <StyledTableCell align='center'>
         <StyledIconButton>
-          <Edit />
+          <Link href={`/admin/books/modify/${trade_uid}`}>
+            <Edit />
+          </Link>
         </StyledIconButton>
 
         <StyledIconButton>
