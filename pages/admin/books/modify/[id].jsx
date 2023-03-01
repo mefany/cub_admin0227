@@ -5,6 +5,7 @@ import {
   Grid,
   Box,
   Button,
+  MenuItem,
   Divider,
   Stack,
   TextField,
@@ -48,9 +49,6 @@ export default function ShopSettings() {
       });
   };
 
-  const checkoutSchema = Yup.object().shape({
-    isbn: Yup.string().required("ISBN을 검색하세요."),
-  });
 
   const getBookByIsbn = async isbn => {
     await axios
@@ -64,7 +62,7 @@ export default function ShopSettings() {
           postNewBook(response.data.items[0])
         } else {
           alert('책 정보가 없습니다. 다시 검색하세요.')
-          setBookInfo({ ...bookInfo, isbn: null })
+          // setBookInfo({ ...bookInfo, isbn: null })
         }
       })
       .catch(error => {
@@ -88,7 +86,15 @@ export default function ShopSettings() {
       });
   };
 
-  const handleOnChange = e => {
+  const handleOnConditionChange = e => {
+    setBookInfo({
+      ...bookInfo,
+      book_condition: e.target.value
+    })
+    MODIFY_BOOK = { ...MODIFY_BOOK, book_condition: e.target.value }
+  }
+
+  const handleOnIsbnChange = e => {
     setBookInfo({
       ...bookInfo,
       isbn: e.target.value
@@ -131,7 +137,6 @@ export default function ShopSettings() {
 
             <Formik
               initialValues={bookInfo}
-              validationSchema={checkoutSchema}
             >
               {({
                 values,
@@ -183,33 +188,42 @@ export default function ShopSettings() {
                   <Paragraph fontWeight={700} mt={2}>
                     추가 입력 정보
                   </Paragraph>
-                  <Paragraph
-                    fontWeight={500}
-                    fontSize={12}
-                    mb={2}
-                    style={{ color: "#D23F57" }}
-                  >
-                    정확한 책 정보를 입력하려면 ISBN을 검색하세요.
-                  </Paragraph>
 
                   <Stack spacing={3} mb={3}>
                     <TextField
+                      select
+                      fullWidth
+                      color="info"
+                      name="book_condition"
+                      onBlur={handleBlur}
+                      placeholder="책상태"
+                      label="책상태"
+                      onChange={handleOnConditionChange}
+                      value={bookInfo.book_condition || ''}
+                      error={Boolean(bookInfo.book_condition === '' || bookInfo.book_condition === null)}
+                      helperText={Boolean(bookInfo.book_condition === '' || bookInfo.book_condition === null) ? '책 상태를 선택하세요.' : ''}
+                    >
+                      <MenuItem value="상">상</MenuItem>
+                      <MenuItem value="중">중</MenuItem>
+                      <MenuItem value="하">하</MenuItem>
+                    </TextField>
+
+                    <TextField
                       color='info'
-                      type='text'
                       name='isbn'
                       label='ISBN'
-                      value={bookInfo.isbn || ""}
-                      onChange={handleOnChange}
-                      error={!!touched.isbn && !!errors.isbn}
-                      helperText={touched.isbn && errors.isbn}
+                      value={bookInfo.isbn || ''}
+                      onBlur={handleBlur}
+                      onChange={handleOnIsbnChange}
+                      error={Boolean(bookInfo.isbn === '' || bookInfo.isbn === null)}
+                      helperText={Boolean(bookInfo.isbn === '' || bookInfo.isbn === null) ? 'ISBN을 입력하세요.' : ''}
                     />
                     <Button
                       onClick={handleIsbnSubmit}
                       color='primary'
                       variant='contained'
-                      disabled={bookInfo.isbn === null}
+                      disabled={bookInfo.isbn === null || values.book_condition === ''}
                       onChange={handleChange}
-
                     >
                       검색
                     </Button>
