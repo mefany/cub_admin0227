@@ -161,7 +161,7 @@ export default function EarningHistory() {
                 hideSelectBtn
                 orderBy={orderBy}
                 heading={tableHeading}
-                rowCount={earnings.length}
+                rowCount={earningHistory.length}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
               />
