@@ -40,15 +40,14 @@ export default function ShopSettings() {
     )
       .then(res => res.json())
       .then(data => {
-        setBookInfo(data[0]);
-        MODIFY_BOOK = data[0]
-        if (data[0].isbn) {
-          getBookByIsbn(data[0].isbn)
+        setBookInfo(data);
+        MODIFY_BOOK = data;
+        if (data.isbn) {
+          getBookByIsbn(data.isbn);
         }
         setLoading(false);
       });
   };
-
 
   const getBookByIsbn = async isbn => {
     await axios
@@ -56,12 +55,13 @@ export default function ShopSettings() {
         `https://i9nwbiqoc6.execute-api.ap-northeast-2.amazonaws.com/test/isbn?isbn=${isbn}`
       )
       .then(response => {
+        console.log(response);
         if (response.data.items.length > 0) {
           setIsbnInfo(response.data.items[0]);
-          MODIFY_BOOK = { ...MODIFY_BOOK, ...response.data.items[0] }
-          postNewBook(response.data.items[0])
+          MODIFY_BOOK = { ...MODIFY_BOOK, ...response.data.items[0] };
+          postNewBook(response.data.items[0]);
         } else {
-          alert('책 정보가 없습니다. 다시 검색하세요.')
+          alert("책 정보가 없습니다. 다시 검색하세요.");
           // setBookInfo({ ...bookInfo, isbn: null })
         }
       })
@@ -70,7 +70,7 @@ export default function ShopSettings() {
       });
   };
 
-  const postNewBook = async (obj) => {
+  const postNewBook = async obj => {
     await axios
       .post(
         `https://i9nwbiqoc6.execute-api.ap-northeast-2.amazonaws.com/test/book`,
@@ -78,7 +78,7 @@ export default function ShopSettings() {
       )
       .then(response => {
         if (response.status === 200) {
-          MODIFY_BOOK = { ...MODIFY_BOOK, book_uid: response.data }
+          MODIFY_BOOK = { ...MODIFY_BOOK, book_uid: response.data };
         }
       })
       .catch(error => {
@@ -89,16 +89,16 @@ export default function ShopSettings() {
   const handleOnConditionChange = e => {
     setBookInfo({
       ...bookInfo,
-      book_condition: e.target.value
-    })
-    MODIFY_BOOK = { ...MODIFY_BOOK, book_condition: e.target.value }
-  }
+      book_condition: e.target.value,
+    });
+    MODIFY_BOOK = { ...MODIFY_BOOK, book_condition: e.target.value };
+  };
 
   const handleOnIsbnChange = e => {
     setBookInfo({
       ...bookInfo,
-      isbn: e.target.value
-    })
+      isbn: e.target.value,
+    });
   };
 
   const handleIsbnSubmit = () => {
@@ -106,11 +106,11 @@ export default function ShopSettings() {
   };
 
   const putNewTrade = async () => {
-    console.log('ddd', MODIFY_BOOK)
+    console.log("ddd", MODIFY_BOOK);
     await axios
       .put(
         `https://i9nwbiqoc6.execute-api.ap-northeast-2.amazonaws.com/test/trade`,
-        { ...MODIFY_BOOK, shop_uid: 1, book_condition: '최상' }
+        { ...MODIFY_BOOK, shop_uid: 1, book_condition: "최상" }
       )
       .then(response => {
         console.log(response);
@@ -135,9 +135,7 @@ export default function ShopSettings() {
               필수 입력 정보
             </Paragraph>
 
-            <Formik
-              initialValues={bookInfo}
-            >
+            <Formik initialValues={bookInfo}>
               {({
                 values,
                 errors,
@@ -193,36 +191,54 @@ export default function ShopSettings() {
                     <TextField
                       select
                       fullWidth
-                      color="info"
-                      name="book_condition"
+                      color='info'
+                      name='book_condition'
                       onBlur={handleBlur}
-                      placeholder="책상태"
-                      label="책상태"
+                      placeholder='책상태'
+                      label='책상태'
                       onChange={handleOnConditionChange}
-                      value={bookInfo.book_condition || ''}
-                      error={Boolean(bookInfo.book_condition === '' || bookInfo.book_condition === null)}
-                      helperText={Boolean(bookInfo.book_condition === '' || bookInfo.book_condition === null) ? '책 상태를 선택하세요.' : ''}
+                      value={bookInfo.book_condition || ""}
+                      error={Boolean(
+                        bookInfo.book_condition === "" ||
+                          bookInfo.book_condition === null
+                      )}
+                      helperText={
+                        Boolean(
+                          bookInfo.book_condition === "" ||
+                            bookInfo.book_condition === null
+                        )
+                          ? "책 상태를 선택하세요."
+                          : ""
+                      }
                     >
-                      <MenuItem value="상">상</MenuItem>
-                      <MenuItem value="중">중</MenuItem>
-                      <MenuItem value="하">하</MenuItem>
+                      <MenuItem value='상'>상</MenuItem>
+                      <MenuItem value='중'>중</MenuItem>
+                      <MenuItem value='하'>하</MenuItem>
                     </TextField>
 
                     <TextField
                       color='info'
                       name='isbn'
                       label='ISBN'
-                      value={bookInfo.isbn || ''}
+                      value={bookInfo.isbn || ""}
                       onBlur={handleBlur}
                       onChange={handleOnIsbnChange}
-                      error={Boolean(bookInfo.isbn === '' || bookInfo.isbn === null)}
-                      helperText={Boolean(bookInfo.isbn === '' || bookInfo.isbn === null) ? 'ISBN을 입력하세요.' : ''}
+                      error={Boolean(
+                        bookInfo.isbn === "" || bookInfo.isbn === null
+                      )}
+                      helperText={
+                        Boolean(bookInfo.isbn === "" || bookInfo.isbn === null)
+                          ? "ISBN을 입력하세요."
+                          : ""
+                      }
                     />
                     <Button
                       onClick={handleIsbnSubmit}
                       color='primary'
                       variant='contained'
-                      disabled={bookInfo.isbn === null || values.book_condition === ''}
+                      disabled={
+                        bookInfo.isbn === null || values.book_condition === ""
+                      }
                       onChange={handleChange}
                     >
                       검색
@@ -297,10 +313,15 @@ export default function ShopSettings() {
                     </>
                   )}
 
-                  {isbnInfo &&
-                    <Button onClick={putNewTrade} variant='contained' color='primary'>
+                  {isbnInfo && (
+                    <Button
+                      onClick={putNewTrade}
+                      variant='contained'
+                      color='primary'
+                    >
                       수정하기
-                    </Button>}
+                    </Button>
+                  )}
                 </form>
               )}
             </Formik>

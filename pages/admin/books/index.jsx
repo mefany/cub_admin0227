@@ -65,8 +65,7 @@ export default function BookList() {
     )
       .then(res => res.json())
       .then(data => {
-        setBooks(data);
-        console.log(data);
+        setBooks(data.data);
         setLoading(false);
       });
   }, []);
@@ -99,9 +98,10 @@ export default function BookList() {
               />
 
               <TableBody>
-                {books.map((book, index) => (
-                  <BookListRow books={book} key={index} />
-                ))}
+                {books &&
+                  books.map((book, index) => (
+                    <BookListRow books={book} key={index} />
+                  ))}
               </TableBody>
             </Table>
           </TableContainer>
