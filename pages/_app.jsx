@@ -9,7 +9,7 @@ import SettingsProvider from "contexts/SettingContext";
 import SnackbarProvider from "components/SnackbarProvider";
 import "nprogress/nprogress.css";
 import "simplebar/dist/simplebar.min.css";
-import "../src/__server__";
+
 //Binding events.
 Router.events.on("routeChangeStart", () => nProgress.start());
 Router.events.on("routeChangeComplete", () => nProgress.done());
@@ -22,15 +22,15 @@ nProgress.configure({
 const App = ({ Component, pageProps }) => {
   const AnyComponent = Component;
 
-  const getLayout = AnyComponent.getLayout ?? ((page) => page);
+  const getLayout = AnyComponent.getLayout ?? (page => page);
 
   return (
     <Fragment>
       <Head>
-        <meta charSet="utf-8" />
-        <meta name="description" content="CUB ADMIN" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charSet='utf-8' />
+        <meta name='description' content='CUB ADMIN' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
         <title>CUB ADMIN</title>
       </Head>
 

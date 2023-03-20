@@ -13,7 +13,6 @@ import {
   StyledTableCell,
   StyledIconButton,
 } from "components-usage/table-rows";
-import api from "__server__/__api__/admin";
 
 const tableHeading = [
   {
@@ -100,33 +99,33 @@ export default function PayoutRequests({ requests }) {
 
               <TableBody>
                 {filteredList.map((request, index) => (
-                  <StyledTableRow role="checkbox" key={index}>
-                    <StyledTableCell align="left">{request.no}</StyledTableCell>
-                    <StyledTableCell align="left">
+                  <StyledTableRow role='checkbox' key={index}>
+                    <StyledTableCell align='left'>{request.no}</StyledTableCell>
+                    <StyledTableCell align='left'>
                       {request.userNo}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
+                    <StyledTableCell align='left'>
                       {request.nickName}
                     </StyledTableCell>
-                    <StyledTableCell align="left">
+                    <StyledTableCell align='left'>
                       {request.totalAmount}
                     </StyledTableCell>
 
-                    <StyledTableCell align="left">
+                    <StyledTableCell align='left'>
                       {request.requestAmount}
                     </StyledTableCell>
 
-                    <StyledTableCell align="left">
+                    <StyledTableCell align='left'>
                       {request.date}
                     </StyledTableCell>
 
-                    <StyledTableCell align="center">
+                    <StyledTableCell align='center'>
                       <StatusWrapper status={request.status}>
                         {request.status}
                       </StatusWrapper>
                     </StyledTableCell>
 
-                    <StyledTableCell align="center">
+                    <StyledTableCell align='center'>
                       <StyledIconButton>
                         <RemoveRedEye />
                       </StyledIconButton>
@@ -138,7 +137,7 @@ export default function PayoutRequests({ requests }) {
           </TableContainer>
         </Scrollbar>
 
-        <Stack alignItems="center" my={4}>
+        <Stack alignItems='center' my={4}>
           <TablePagination
             onChange={handleChangePage}
             count={Math.ceil(requests.length / rowsPerPage)}

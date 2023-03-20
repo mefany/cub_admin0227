@@ -8,7 +8,6 @@ import TablePagination from "components/data-table/TablePagination";
 import VendorDashboardLayout from "components/layouts/admin-dashboard";
 import useMuiTable from "hooks/useMuiTable";
 import { MemberRow } from "components-usage/table-rows";
-import api from "__server__/__api__/admin"; // table column list
 import { useState, useEffect } from "react";
 
 const tableHeading = [
@@ -42,7 +41,7 @@ const tableHeading = [
     label: "Action",
     align: "center",
   },
-]; // =============================================================================
+];
 
 CustomerList.getLayout = function getLayout(page) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
@@ -70,8 +69,8 @@ export default function CustomerList() {
     fetch(
       `https://i9nwbiqoc6.execute-api.ap-northeast-2.amazonaws.com/test/user/`
     )
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setUsers(data);
         console.log(data);
         setLoading(false);
@@ -85,7 +84,7 @@ export default function CustomerList() {
     <Box py={4}>
       <H3 mb={2}>회원</H3>
 
-      <SearchArea handleSearch={() => {}} searchPlaceholder="회원 검색" />
+      <SearchArea handleSearch={() => {}} searchPlaceholder='회원 검색' />
 
       <Card>
         <Scrollbar>
@@ -106,7 +105,7 @@ export default function CustomerList() {
               />
 
               <TableBody>
-                {users.map((user) => (
+                {users.map(user => (
                   <MemberRow user={user} key={user.user_uid} />
                 ))}
               </TableBody>
@@ -114,7 +113,7 @@ export default function CustomerList() {
           </TableContainer>
         </Scrollbar>
 
-        <Stack alignItems="center" my={4}>
+        <Stack alignItems='center' my={4}>
           <TablePagination
             onChange={handleChangePage}
             count={Math.ceil(filteredList.length / rowsPerPage)}
@@ -124,11 +123,3 @@ export default function CustomerList() {
     </Box>
   );
 }
-// export const getStaticProps = async () => {
-//   const members = await api.members();
-//   return {
-//     props: {
-//       members,
-//     },
-//   };
-// };

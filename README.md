@@ -40,11 +40,6 @@ admin-react/
     ├── dev -- for developer
     ├── Other pages
 ├── src/
-|   ├── __server__/
-|   |   ├── __api__
-|   |   |   ├── all api functions create inside
-|   |   ├── __db__
-|   |   |   ├── all dummy data inside
 |   ├── animations
 |   ├── components/
 |   |   ├── icons
@@ -95,12 +90,3 @@ Component structure are straight forward.
 
 Open `src/contexts/SettingContext.tsx` and change the value of direction to 'rtl'
 `const initialSettings: SettingsOptions = { direction: "rtl" };`
-
-## REST API
-
-- REST API calls are located in `src/__server__/__api__`
-
-## Fake server
-
-- REST APIs are getting data from dummy server located in `src/__server__/__db__`
-- This server serves dummy data. You need to implement your own server.

@@ -8,7 +8,6 @@ import { H3 } from "components/Typography";
 import Scrollbar from "components/Scrollbar";
 import useMuiTable from "hooks/useMuiTable";
 import { BookListRow } from "components-usage/table-rows";
-// import api from "__server__/__api__/admin"; // table column list
 import { useState, useEffect } from "react";
 
 const tableHeading = [
@@ -117,11 +116,3 @@ export default function BookList() {
     </Box>
   );
 }
-// export const getStaticProps = async () => {
-//   const books = await api.books();
-//   return {
-//     props: {
-//       books,
-//     },
-//   };
-// };
