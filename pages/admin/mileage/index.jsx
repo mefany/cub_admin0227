@@ -40,79 +40,54 @@ const tableHeading = [
     align: "center",
   },
 ];
-
-export const earningHistory = [
+export const mileageList = [
   {
-    no: 1,
-    date: "20-04-2022",
-    sellerEarning: 200,
-    adminCommission: 5.15,
-    orderNo: "5256SD6465D32",
-    shopName: "The Beauty Shop",
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Accepted",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
   {
-    no: 2,
-    date: "19-04-2022",
-    shopName: "The Gainner",
-    orderNo: "5256SD6465D33",
-    adminCommission: 2.5,
-    sellerEarning: 250,
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Processing",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
   {
-    no: 3,
-    date: "17-04-2022",
-    orderNo: "5256SD6465D34",
-    shopName: "The Beauty Shop",
-    adminCommission: 5.15,
-    sellerEarning: 200,
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Pending",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
   {
-    no: 4,
-    orderNo: "5256SD6465D35",
-    date: "14-04-2022",
-    shopName: "The Beauty Shop",
-    adminCommission: 2.5,
-    sellerEarning: 250,
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Accepted",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
   {
-    no: 5,
-    orderNo: "5256SD6465D36",
-    date: "08-04-2022",
-    shopName: "The Beauty Shop",
-    adminCommission: 2.5,
-    sellerEarning: 250,
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Accepted",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
   {
-    no: 6,
-    orderNo: "5256SD6465D37",
-    date: "01-04-2022",
-    shopName: "Beyond Threads",
-    adminCommission: 2.5,
-    sellerEarning: 250,
-  },
-  {
-    no: 7,
-    orderNo: "5256SD6465D38",
-    date: "26-03-2022",
-    shopName: "Beyond Threads",
-    adminCommission: 2.5,
-    sellerEarning: 250,
-  },
-  {
-    no: 8,
-    orderNo: "5256SD6465D39",
-    date: "16-03-2022",
-    shopName: "Beyond Threads",
-    adminCommission: 2.5,
-    sellerEarning: 250,
-  },
-  {
-    no: 9,
-    orderNo: "5256SD6465D40",
-    date: "12-03-2022",
-    shopName: "Beyond Threads",
-    adminCommission: 2.5,
-    sellerEarning: 250,
+    orderNo: "6ed34Edf65d",
+    shopName: "기프티쇼",
+    amount: 50000,
+    status: "Accepted",
+    name: "야핏라이더 자전거",
+    image: "/assets/images/products/24.Revel2020.png",
   },
 ];
 
@@ -121,7 +96,7 @@ MileageList.getLayout = function getLayout(page) {
 }; // =============================================================================
 
 // =============================================================================
-export default function MileageList({ requests }) {
+export default function MileageList() {
   const {
     order,
     orderBy,
@@ -131,7 +106,7 @@ export default function MileageList({ requests }) {
     handleChangePage,
     handleRequestSort,
   } = useMuiTable({
-    listData: requests,
+    listData: mileageList,
   });
   return (
     <Box py={4}>
@@ -150,7 +125,7 @@ export default function MileageList({ requests }) {
                 hideSelectBtn
                 orderBy={orderBy}
                 heading={tableHeading}
-                rowCount={requests.length}
+                rowCount={mileageList.length}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
               />
@@ -167,7 +142,7 @@ export default function MileageList({ requests }) {
         <Stack alignItems='center' my={4}>
           <TablePagination
             onChange={handleChangePage}
-            count={Math.ceil(requests.length / rowsPerPage)}
+            count={Math.ceil(mileageList.length / rowsPerPage)}
           />
         </Stack>
       </Card>

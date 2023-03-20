@@ -131,7 +131,7 @@ EarningHistory.getLayout = function getLayout(page) {
 }; // =============================================================================
 
 // =============================================================================
-export default function EarningHistory({ earnings }) {
+export default function EarningHistory() {
   const {
     order,
     orderBy,
@@ -141,7 +141,7 @@ export default function EarningHistory({ earnings }) {
     handleChangePage,
     handleRequestSort,
   } = useMuiTable({
-    listData: earnings,
+    listData: earningHistory,
     defaultSort: "no",
   });
   return (
@@ -201,7 +201,7 @@ export default function EarningHistory({ earnings }) {
         <Stack alignItems='center' my={4}>
           <TablePagination
             onChange={handleChangePage}
-            count={Math.ceil(earnings.length / rowsPerPage)}
+            count={Math.ceil(earningHistory.length / rowsPerPage)}
           />
         </Stack>
       </Card>
