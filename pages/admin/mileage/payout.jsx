@@ -55,14 +55,89 @@ const tableHeading = [
     label: "Action",
     align: "center",
   },
-]; // =============================================================================
+];
+
+export const payoutRequests = [
+  {
+    no: 1,
+    date: "20-04-2022",
+    status: "Accepted",
+    userNo: "5256SD6465D38",
+    totalAmount: 1_200,
+    requestAmount: 200,
+    nickName: "Jessie",
+  },
+  {
+    no: 2,
+    date: "19-04-2022",
+    status: "Rejected",
+    totalAmount: 250,
+    userNo: "5256SD6465D38",
+    requestAmount: 25,
+    nickName: "Jessie",
+  },
+  {
+    no: 3,
+    date: "17-04-2022",
+    status: "Processing",
+    totalAmount: 1_300,
+    requestAmount: 200,
+    nickName: "Jessie",
+    userNo: "5256SD6465D38",
+  },
+  {
+    no: 4,
+    date: "14-04-2022",
+    status: "Accepted",
+    nickName: "Jessie",
+    totalAmount: 2_200,
+    requestAmount: 200,
+    userNo: "5256SD6465D38",
+  },
+  {
+    no: 5,
+    date: "08-04-2022",
+    status: "Accepted",
+    totalAmount: 700,
+    requestAmount: 100,
+    nickName: "Jessie",
+    userNo: "5256SD6465D38",
+  },
+  {
+    no: 6,
+    date: "01-04-2022",
+    totalAmount: 930,
+    userNo: "5256SD6465D38",
+    status: "Processing",
+    requestAmount: 130,
+    nickName: "Jessie",
+  },
+  {
+    no: 7,
+    date: "26-03-2022",
+    status: "Rejected",
+    totalAmount: 450,
+    requestAmount: 50,
+    userNo: "5256SD6465D38",
+    nickName: "Jessie",
+  },
+  {
+    no: 8,
+    date: "16-03-2022",
+    status: "Processing",
+    totalAmount: 360,
+    requestAmount: 60,
+    userNo: "5256SD6465D38",
+    nickName: "Jessie",
+  },
+];
 
 PayoutRequests.getLayout = function getLayout(page) {
   return <VendorDashboardLayout>{page}</VendorDashboardLayout>;
 }; // =============================================================================
 
 // =============================================================================
-export default function PayoutRequests({ requests }) {
+export default function PayoutRequests() {
   const {
     order,
     orderBy,
@@ -72,7 +147,7 @@ export default function PayoutRequests({ requests }) {
     handleChangePage,
     handleRequestSort,
   } = useMuiTable({
-    listData: requests,
+    listData: payoutRequests,
     defaultSort: "no",
   });
   return (
@@ -92,7 +167,7 @@ export default function PayoutRequests({ requests }) {
                 hideSelectBtn
                 orderBy={orderBy}
                 heading={tableHeading}
-                rowCount={requests.length}
+                rowCount={payoutRequests.length}
                 numSelected={selected.length}
                 onRequestSort={handleRequestSort}
               />
@@ -140,18 +215,10 @@ export default function PayoutRequests({ requests }) {
         <Stack alignItems='center' my={4}>
           <TablePagination
             onChange={handleChangePage}
-            count={Math.ceil(requests.length / rowsPerPage)}
+            count={Math.ceil(payoutRequests.length / rowsPerPage)}
           />
         </Stack>
       </Card>
     </Box>
   );
 }
-export const getStaticProps = async () => {
-  const requests = await api.payoutRequests();
-  return {
-    props: {
-      requests,
-    },
-  };
-};
